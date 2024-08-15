@@ -13,7 +13,7 @@ def passagem_referencia(x):
     print("dentro passagem_referencia")
     print(x)
 
-lista = [10,20,30,40,50]-
+lista = [10,20,30,40,50]
 print("antes passagem_referencia")
 print(lista)
 passagem_referencia(lista)
