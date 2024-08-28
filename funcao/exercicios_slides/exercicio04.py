@@ -26,7 +26,18 @@ numeros = {
     "sessenta": 60,
     "setenta": 70,
     "oitenta": 80,
-    "noventa": 90
+    "noventa": 90,
+    "cem": 100,
+    "cento": 100,
+    "duzentos": 200,
+    "trezentos": 300,
+    "quatrocentos": 400,
+    "quinhentos": 500,
+    "seiscentos": 600,
+    "setecentos": 700,
+    "oitocentos": 800,
+    "novecentos": 900,
+    "mil": 1000
 }
 
 extenso = input("digite um numero por extenso: ")
@@ -37,10 +48,25 @@ print(partes)
 
 numero = 0
 print("------parcial------")
-for parte in partes:
-    valor = numeros[parte]
-    numero += valor
-    print(numero)
-
+ignora = False
+for i in range(len(partes)):
+    parte = partes[i]
+    if not ignora:
+        multiplicador = 1
+        if i < len(partes)-1:
+            if partes[i+1] == "mil":
+                multiplicador = 1000
+                ignora = True
+            elif partes[i+1] == "milhoes" or partes[i+1]== "milhao":
+                multiplicador = 1000000
+                ignora = True
+    
+        valor = numeros[parte]
+        valor = valor * multiplicador
+        numero += valor
+        print(numero)
+    else:
+        ignora = False
+   
 print('-----final-----')
 print(numero)
