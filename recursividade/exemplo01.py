@@ -1,9 +1,9 @@
 def funcaoA(valor):
-    if valor != 30:
+    if valor != 5:
         print("A")
         print(valor)
         funcaoA(valor+1)
-        print("final A")
+        print(f"final A {valor}")
     else:
         print("caso base")
 
@@ -12,4 +12,5 @@ def funcaoB(valor):
     print(valor)
 
 if __name__ == "__main__":
-    funcaoA(10)
+    funcaoA(1)
+    print("acabou")
