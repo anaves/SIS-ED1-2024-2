@@ -31,5 +31,5 @@ def insertion_sort(L):
 if __name__ == "__main__":
     lista = ["O", "R", "D", "E", "N", "A"]
     print(lista)
-    insertion_sort(lista)
+    selection_sort(lista)
     print(lista)
