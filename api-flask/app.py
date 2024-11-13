@@ -9,14 +9,12 @@ CORS(app)  # Ativa cors
 def homepage():
     return "Hello World!"
 
-
 @app.route("/soma")
 def soma():
     s = 0
     for i in range(20):
         s += i
     return f"resultado={s}"
-
 
 # http://127.0.0.1:5000/multi?nome=Jose&varx=8&vary=15
 @app.route("/multi", methods=["GET"])

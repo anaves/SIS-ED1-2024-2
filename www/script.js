@@ -10,3 +10,7 @@ async function getDados() {
     }
 
 }
+
+async function buscaCliente(params) {
+    // tentar finalizar
+}
