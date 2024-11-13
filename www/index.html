@@ -16,10 +16,14 @@
     <div>
         <form>
             <label for="">CPF</label>
-            <input type="text" name="" id="cpf">
-            <button type="submit" onclick="buscaCliente()">Buscar</button>
-            <textarea id="retorno" cols="30" rows="10"></textarea>
+            <input type="text" id="cpf">
         </form>
+        <button type="submit" onclick="buscaCliente()">Buscar</button>
+    </div>
+    <div>
+        <p><strong>Nome: </strong> <span id="nome"></span></p>
+        <p><strong>Nascimento: </strong> <span id="nasc"></span></p>
+        <p><strong>Email: </strong> <span id="email"></span></p>
     </div>
 </body>
 </html>

@@ -61,7 +61,12 @@ def dados(cpf):
             "email": "paulo.souza@example.com",
         },
     }
-    cliente = dados_pessoas.get(cpf, "registro nao encontrado")
+    vazio = {
+        "nome": "Nao encontrado",
+        "data_nascimento": "Nao encontrado",
+        "email": "Nao encontrado",
+    }
+    cliente = dados_pessoas.get(cpf, vazio)
     return cliente
 
 if __name__ == "__main__":
