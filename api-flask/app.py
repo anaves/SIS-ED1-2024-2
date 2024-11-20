@@ -1,5 +1,7 @@
 from flask import Flask, request
 from flask_cors import CORS
+import json
+import os  # operational system
 
 # pip install flask-cors
 app = Flask("Minha API")
@@ -33,34 +35,31 @@ def consulta_cadastro():
     registro = dados(documento)
     return registro
 
+def carregar_arquivo():
+    # caminho de onde o arquivo esta salvo
+    caminho_arquivo = os.path.realpath("api-flask/dados.json")
+    try:
+        with open(caminho_arquivo, "r") as arq:
+            return json.load(arq)
+    except Exception:
+        return "Falha ao carregar o arquivo"
+
+def gravar_arquivo(dados):
+    caminho_arquivo = os.path.realpath("api-flask/dados.json")
+    try:
+        with open(caminho_arquivo, "w") as arq:
+            json.dump(dados, arq, indent=4)
+        return "dados armazenados"
+    except Exception:
+        return "Falha ao carregar o arquivo"
+
+def salvar_dados(cpf, registro):
+    dados_pessoas = carregar_arquivo()
+    dados_pessoas[cpf] = registro
+    gravar_arquivo(dados_pessoas)
+
 def dados(cpf):
-    dados_pessoas = {
-        "12345678900": {
-            "nome": "João da Silva",
-            "data_nascimento": "1990-05-15",
-            "email": "joao.silva@example.com",
-        },
-        "98765432111": {
-            "nome": "Maria Oliveira",
-            "data_nascimento": "1985-09-20",
-            "email": "maria.oliveira@example.com",
-        },
-        "11122233344": {
-            "nome": "Carlos Pereira",
-            "data_nascimento": "1978-02-10",
-            "email": "carlos.pereira@example.com",
-        },
-        "55566677788": {
-            "nome": "Ana Costa",
-            "data_nascimento": "1995-07-25",
-            "email": "ana.costa@example.com",
-        },
-        "99988877766": {
-            "nome": "Paulo Souza",
-            "data_nascimento": "2000-11-30",
-            "email": "paulo.souza@example.com",
-        },
-    }
+    dados_pessoas = carregar_arquivo()
     vazio = {
         "nome": "Nao encontrado",
         "data_nascimento": "Nao encontrado",
@@ -71,3 +70,11 @@ def dados(cpf):
 
 if __name__ == "__main__":
     app.run(debug=True)
+    
+    # pode ser uma ideia para um cadastro!!!
+    # valores = {
+    #     "nome": "Adolfo Silveira",
+    #     "data_nascimento": "2000-07-25",
+    #     "email": "adolfo.silveira@example.com"
+    # }
+    # salvar_dados("11111", valores)
