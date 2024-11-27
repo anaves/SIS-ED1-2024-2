@@ -11,23 +11,6 @@ CORS(app)  # Ativa cors
 def homepage():
     return "Hello World!"
 
-@app.route("/soma")
-def soma():
-    s = 0
-    for i in range(20):
-        s += i
-    return f"resultado={s}"
-
-# http://127.0.0.1:5000/multi?nome=Jose&varx=8&vary=15
-@app.route("/multi", methods=["GET"])
-def mult():
-    nome = request.args.get("nome")
-    x = request.args.get("varx", type=float)
-    y = request.args.get("vary")  # y sera str
-    y = float(y)
-    resultado = x * y
-    return f"Ola {nome}, o resultado = {resultado}"
-
 
 @app.route("/consulta", methods=["GET"])
 def consulta_cadastro():
@@ -35,6 +18,14 @@ def consulta_cadastro():
     registro = dados(documento)
     return registro
 
+@app.route("/cadastro", methods=["POST"])
+def cadastrar():
+    payload = request.json
+    cpf = payload.get("cpf")
+    valores = payload.get("dados")
+    salvar_dados(cpf, valores)
+    return "dados cadastrados"
+           
 def carregar_arquivo():
     # caminho de onde o arquivo esta salvo
     caminho_arquivo = os.path.realpath("api-flask/dados.json")
@@ -71,10 +62,5 @@ def dados(cpf):
 if __name__ == "__main__":
     app.run(debug=True)
     
-    # pode ser uma ideia para um cadastro!!!
-    # valores = {
-    #     "nome": "Adolfo Silveira",
-    #     "data_nascimento": "2000-07-25",
-    #     "email": "adolfo.silveira@example.com"
-    # }
-    # salvar_dados("11111", valores)
+
+   
